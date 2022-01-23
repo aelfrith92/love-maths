@@ -112,8 +112,9 @@ body {
 }
 
 .btn--big::after {
-    content: attr(data-type);
-    font-size: 1rem;
+    /*The content enclosed in the data-type attributes will show up as text ::after the btn--big elements*/
+    content: attr(data-type);/*reads content in the data-type attributes*/
+    font-size: 1rem;/*And applies the style*/
     color: #445361;
     position: relative;
     left: -0.5em;
