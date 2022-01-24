@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    document.querySelector('#answer-box').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter')
+            checkAnswer();
+    })
+
     //Il gioco parte con l'operazione di addizione di default
     //la stringa passata sarà utilizzabile nella funzione
     runGame('addition');
@@ -57,7 +63,6 @@ function checkAnswer() {
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if(isCorrect){
-        alert('Right!');
         incrementScore();
     } else {
         alert(`Wrong! Correct answer was ${calculatedAnswer[0]}!`);
@@ -65,6 +70,9 @@ function checkAnswer() {
     }
 
     runGame(calculatedAnswer[1]);
+    // Erase the answer from the textbox after submission
+    document.querySelector('#answer-box').value = '';
+    document.querySelector('#answer-box').focus();
 }
 
 /**
