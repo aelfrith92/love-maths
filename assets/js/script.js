@@ -34,6 +34,12 @@ function runGame(gameType) {
     let num2 = Math.floor(Math.random() * 25) + 1;
     if (gameType === 'addition') {
         displayAdditionQuestion(num1, num2);
+    } else if (gameType === 'multiply') {
+        displayMultiplyQuestion(num1, num2);
+    } else if (gameType === 'subtract') {
+        displaySubtractQuestion(num1, num2);
+    } else if (gameType === 'divide') {
+        displayDivideQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
@@ -74,6 +80,15 @@ function calculateCorrectAnswer() {
     if (operator === '+') {
         let result = operand1 + operand2;
         return [result, 'addition'];
+    } else if (operator === 'x') {
+        let result = operand1 * operand2;
+        return [result, 'multiply'];
+    } else if (operator === '-') {
+        let result = operand1 - operand2;
+        return [result, 'subtract'];
+    } else if (operator === '÷') {
+        let result = parseInt(operand1 / operand2);
+        return [result, 'divide'];
     } else {
         alert(`Unimplemented operator: ${operator}`);
         throw `Unimplemented operator: ${operator}. Aborting!`;
@@ -101,10 +116,20 @@ function displayAdditionQuestion(operand1, operand2) {
     document.querySelector('#operand2').textContent = operand2;
     document.querySelector('#operator').textContent = '+';
 }
-function displaySubtractQuestion() {
-
+function displaySubtractQuestion(operand1, operand2) {
+    document.querySelector('#operand1').textContent = operand1;
+    document.querySelector('#operand2').textContent = operand2;
+    document.querySelector('#operator').textContent = '-';
 }
 
-function displayMultiplyQuestion() {
+function displayMultiplyQuestion(operand1, operand2) {
+    document.querySelector('#operand1').textContent = operand1;
+    document.querySelector('#operand2').textContent = operand2;
+    document.querySelector('#operator').textContent = 'x';
+}
 
+function displayDivideQuestion(operand1, operand2) {
+    document.querySelector('#operand1').textContent = operand1;
+    document.querySelector('#operand2').textContent = operand2;
+    document.querySelector('#operator').textContent = '÷';
 }
