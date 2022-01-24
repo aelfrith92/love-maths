@@ -40,8 +40,6 @@ function runGame(gameType) {
     }
 }
 
-runGame();
-
 function checkAnswer() {
 
 }
