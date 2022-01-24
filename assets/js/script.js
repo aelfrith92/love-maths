@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // per controllare quale sia stato effettivamente premuto.
         button.addEventListener('click', function(){
             if(this.getAttribute('data-type') === 'submit') {
-                alert('you clicked submit');
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -40,11 +40,43 @@ function runGame(gameType) {
     }
 }
 
+/**
+ * Checks the answer against the first element in 
+ * the returned calculateCorrectAnswer array
+ */
 function checkAnswer() {
 
-}
-function calculateCorrectAnswer() {
+    let userAnswer = parseInt(document.querySelector('#answer-box').value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
 
+    if(isCorrect){
+        alert('Right!')
+    } else {
+        alert(`Wrong! Correct answer was ${calculatedAnswer[0]}!`)
+    }
+
+    runGame(calculatedAnswer[1]);
+
+}
+
+/**
+ * Gets the operands (the numbers) and the operator (plus, minus etc)
+ * directly from the resulting HTML (the DOM) and returns the correct answer
+ */
+function calculateCorrectAnswer() {
+    let operand1 = parseInt(document.querySelector('#operand1').innerText);
+    let operand2 = parseInt(document.querySelector('#operand2').innerText);
+    let operator = document.querySelector('#operator').innerText;
+
+    // Determining the gameType by the operator used. Passing variables is unnecessary
+    if (operator === '+') {
+        let result = operand1 + operand2;
+        return [result, 'addition'];
+    } else {
+        alert(`Unimplemented operator: ${operator}`);
+        throw `Unimplemented operator: ${operator}. Aborting!`;
+    }
 }
 function incrementScore() {
 
