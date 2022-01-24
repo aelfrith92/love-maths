@@ -19,11 +19,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
     }
+    //Il gioco parte con l'operazione di addizione di default
+    //la stringa passata sarà utilizzabile nella funzione
+    runGame('addition');
 })
 
+/**
+ * The main game loop, called when the script is first loaded
+ * and after the user's answer has been processed 
+ */
 function runGame() {
-    
+    //Genera 2 numeri interi casuali
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
 }
+
+runGame();
+
 function checkAnswer() {
 
 }
