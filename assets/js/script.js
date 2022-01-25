@@ -36,17 +36,22 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function runGame(gameType) {
     //Genera 2 numeri interi casuali
-    let num1 = Math.floor(Math.random() * 25) + 1;
-    let num2 = Math.floor(Math.random() * 25) + 1;
+    let num1 = Math.floor(Math.random() * 100) + 1;
+    let num2 = Math.floor(Math.random() * 100) + 1;
     if (gameType === 'addition') {
         displayAdditionQuestion(num1, num2);
     } else if (gameType === 'multiply') {
         displayMultiplyQuestion(num1, num2);
     } else if (gameType === 'subtract') {
         displaySubtractQuestion(num1, num2);
-    } else if (gameType === 'divide') {
-        displayDivideQuestion(num1, num2);
-    } else {
+    } else if (gameType === "divide") {
+	    let max = Math.max(num1, num2);
+	    let min = Math.min(num1, num2);
+	    while(max % min !== 0){
+	        min = Math.floor(Math.random() * max) + 1;
+	    }
+		displayDivisionQuestion(max, min);
+	} else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
     }
@@ -94,10 +99,11 @@ function calculateCorrectAnswer() {
     } else if (operator === '-') {
         let result = operand1 - operand2;
         return [result, 'subtract'];
-    } else if (operator === '÷') {
-        let result = parseInt(operand1 / operand2);
-        return [result, 'divide'];
-    } else {
+    } else if (operator === '/') {
+	    let max = Math.max(operand1, operand2);
+	    let min = Math.min(operand1, operand2);
+		return [max / min, "divide"];
+	} else {
         alert(`Unimplemented operator: ${operator}`);
         throw `Unimplemented operator: ${operator}. Aborting!`;
     }
@@ -136,8 +142,8 @@ function displayMultiplyQuestion(operand1, operand2) {
     document.querySelector('#operator').textContent = 'x';
 }
 
-function displayDivideQuestion(operand1, operand2) {
-    document.querySelector('#operand1').textContent = operand1;
-    document.querySelector('#operand2').textContent = operand2;
-    document.querySelector('#operator').textContent = '÷';
+function displayDivisionQuestion(operand1, operand2){
+    document.getElementById("operand1").textContent = Math.max(operand1, operand2);
+	document.getElementById("operand2").textContent = Math.min(operand1, operand2);
+	document.getElementById("operator").textContent = "/";
 }
